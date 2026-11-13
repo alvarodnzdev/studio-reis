@@ -1,0 +1,879 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Studio Reis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Figtree:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;1,500&display=swap">
+<style>
+/* Layout: duas portas lado a lado. A barbearia usa o preto e branco da marca; a adega tem o bordô.
+   A comanda de papel é o único objeto claro da página e junta corte e garrafa na mesma conta. */
+:root{
+  color-scheme:dark;
+  --ink:#0a0b0c;          /* preto da marca, levemente frio */
+  --ink-veil:rgba(10,11,12,.9);
+  --coal:#121416;
+  --slate:#1b1e21;
+  --line:#2c3135;
+  --paper:#f4f2ee;        /* branco do logo */
+  --paper-dim:#dcd9d2;
+  --ash:#a3a8ab;
+  --petrol:#49a9c2;       /* azul petróleo dos posts da barbearia */
+  --petrol-deep:#0e4658;
+  --wine:#7a1d39;
+  --wine-hi:#93264a;
+  --wine-deep:#2a0b16;
+  --wine-glow:#e59ab0;
+  --shade:rgba(0,0,0,.62);
+  --display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --serif:"Playfair Display",Georgia,"Times New Roman",serif;
+  --bar:64px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+:root{padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--ink);color:var(--paper);font:400 16px/1.5 var(--body);padding-bottom:calc(68px + env(safe-area-inset-bottom,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--ink)}
+[hidden]{display:none!important}
+h1,h2,h3,p,dl,dd,ul{margin:0}
+ul{padding:0;list-style:none}
+a{color:inherit}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--petrol);outline-offset:2px}
+.wrap{max-width:1140px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* ---------- marca ---------- */
+.e3{display:inline-block;width:.6em;height:.69em;background:
+  linear-gradient(currentColor,currentColor) top/100% 23% no-repeat,
+  linear-gradient(currentColor,currentColor) center/100% 23% no-repeat,
+  linear-gradient(currentColor,currentColor) bottom/100% 23% no-repeat}
+.logo{position:relative;display:inline-grid;justify-items:center;border:2px solid currentColor;padding:.55em .6em;line-height:1;font-family:var(--display);color:var(--paper);text-decoration:none;font-size:12px}
+.logo b{display:flex;align-items:baseline;gap:.07em;font-weight:800;font-stretch:110%;font-size:2em;letter-spacing:.02em}
+.logo small{position:absolute;left:50%;transform:translateX(-50%);font-size:.44em;font-weight:600;letter-spacing:.42em;white-space:nowrap;background:var(--logo-bg,var(--ink));padding:0 .5em 0 .92em}
+.logo small.t{top:-.7em}
+.logo small.b{bottom:-.7em}
+
+/* ---------- tipos ---------- */
+.eyebrow{font:600 .72rem/1.2 var(--display);font-stretch:112%;letter-spacing:.2em;text-transform:uppercase;color:var(--ash)}
+.h-display{font-family:var(--display);font-stretch:122%;font-weight:800;text-transform:uppercase;line-height:1;letter-spacing:-.005em;font-size:clamp(1.6rem,4.4vw,2.7rem);text-wrap:balance}
+.h-wine{font:italic 500 clamp(2.2rem,6vw,3.6rem)/1 var(--serif);text-wrap:balance}
+.lede{color:var(--ash);max-width:56ch}
+.num{font-variant-numeric:tabular-nums}
+.fine{font-size:.82rem;color:var(--ash)}
+.tag{display:inline-block;font:700 .62rem/1 var(--display);font-stretch:110%;letter-spacing:.14em;text-transform:uppercase;padding:5px 7px;border:1px solid var(--line);color:var(--ash);white-space:nowrap}
+.tag.site{border-color:var(--petrol);color:var(--petrol)}
+.tag.wine{border-color:var(--wine-hi);color:var(--wine-glow)}
+
+/* ---------- botões ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border:1.5px solid var(--paper);border-radius:0;background:var(--paper);color:var(--ink);font:700 .78rem/1.1 var(--display);font-stretch:112%;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;text-align:center;cursor:pointer;transition:background .15s,color .15s,border-color .15s}
+.btn:hover{background:transparent;color:var(--paper)}
+.btn.ghost{background:transparent;color:var(--paper);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--paper)}
+.btn.wine{background:var(--wine);border-color:var(--wine);color:var(--paper)}
+.btn.wine:hover{background:var(--wine-hi);border-color:var(--wine-hi)}
+.btn.ink{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.btn.ink:hover{background:transparent;color:var(--ink)}
+.btn.small{min-height:36px;padding:0 12px;font-size:.66rem}
+.btn.block{width:100%}
+.btn[disabled]{opacity:.35;cursor:not-allowed}
+.btn.ink[disabled]:hover{background:var(--ink);color:var(--paper)}
+
+/* ---------- topo e navegação ---------- */
+.proto{background:var(--slate);border-bottom:1px solid var(--line);color:var(--paper-dim);font-size:.8rem;line-height:1.35}
+.proto .wrap{padding-block:8px}
+.proto b{font:700 .68rem/1 var(--display);font-stretch:110%;letter-spacing:.14em;text-transform:uppercase;color:var(--paper);margin-right:8px}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--ink-veil);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:28px;height:var(--bar)}
+.top nav{display:none;gap:4px;margin-left:auto}
+.top nav a{padding:10px 14px;font:600 .74rem/1 var(--display);font-stretch:112%;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--ash);border-bottom:2px solid transparent}
+.top nav a:hover{color:var(--paper)}
+.top nav a[aria-current]{color:var(--paper);border-bottom-color:var(--paper)}
+.bag{margin-left:auto;display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;background:none;border:1px solid var(--line);cursor:pointer;font:600 .72rem/1 var(--display);font-stretch:112%;letter-spacing:.14em;text-transform:uppercase}
+.bag:hover{border-color:var(--paper)}
+.bag .n{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 6px;background:var(--wine);color:var(--paper);font-variant-numeric:tabular-nums}
+.tabs{position:fixed;inset:auto 0 0;z-index:20;display:grid;grid-template-columns:repeat(4,1fr);background:var(--coal);border-top:1px solid var(--line);padding:0 max(16px,env(safe-area-inset-right,0px)) env(safe-area-inset-bottom,0px) max(16px,env(safe-area-inset-left,0px))}
+.tabs a{display:grid;justify-items:center;gap:4px;padding:10px 4px 9px;text-decoration:none;color:var(--ash);font:600 .62rem/1 var(--display);font-stretch:108%;letter-spacing:.12em;text-transform:uppercase}
+.tabs a svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.6}
+.tabs a[aria-current]{color:var(--paper)}
+@media(min-width:860px){
+  body{padding-bottom:0}
+  .wrap{padding-left:max(32px,env(safe-area-inset-left,0px));padding-right:max(32px,env(safe-area-inset-right,0px))}
+  .top nav{display:flex}
+  .bag{margin-left:0}
+  .tabs{display:none}
+}
+
+/* ---------- início ---------- */
+.hero{display:grid;gap:36px;padding-block:44px 40px}
+.hero-copy{display:grid;gap:22px;justify-items:start;min-width:0}
+.hero h1{font-family:var(--display);font-stretch:125%;font-weight:800;text-transform:uppercase;font-size:clamp(2.35rem,7.4vw,5.2rem);line-height:.98;letter-spacing:-.01em}
+.hero h1 span{display:block}
+.hero .lede{font-size:1.06rem}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.proof{display:flex;flex-wrap:wrap;gap:8px 22px;color:var(--ash);font-size:.9rem}
+.proof strong{color:var(--paper);font-weight:600}
+.next{border:1px solid var(--line);background:var(--coal);min-width:0}
+.next header{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid var(--line)}
+.next .live{display:inline-flex;align-items:center;gap:8px;font-size:.8rem;color:var(--petrol)}
+.next .live::before{content:"";width:8px;height:8px;background:var(--petrol);border-radius:50%}
+.slot-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;width:100%;padding:14px 18px;background:none;border:0;border-bottom:1px solid var(--line);text-align:left;cursor:pointer}
+.slot-row:last-of-type{border-bottom:0}
+.slot-row:hover{background:var(--slate)}
+.slot-row .t{font:800 1.5rem/1 var(--display);font-stretch:112%;font-variant-numeric:tabular-nums}
+.slot-row .w{display:grid;font-size:.9rem;min-width:0}
+.slot-row .w small{color:var(--ash);font-size:.8rem}
+.slot-row .go{font:700 .66rem/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--ash)}
+.slot-row:hover .go{color:var(--paper)}
+
+.doors{display:grid;gap:16px;padding-block:8px 56px}
+.door{min-width:0;padding:28px 22px;border:1px solid var(--line)}
+.door > header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:10px 16px;margin-bottom:14px}
+.door.tabela{background:var(--coal)}
+.door.adega{background:linear-gradient(160deg,var(--wine-deep),var(--wine) 140%);border-color:var(--wine);display:grid;gap:22px;align-content:start}
+.door.adega > header{margin-bottom:0}
+.price{display:flex;align-items:baseline;gap:10px;width:100%;padding:13px 0;background:none;border:0;border-bottom:1px solid var(--line);text-align:left;cursor:pointer}
+.price:last-child{border-bottom:0}
+.price .nm{font-weight:600;min-width:0}
+.price .nm em{font-style:normal;font-weight:400;color:var(--ash);font-size:.86rem;margin-left:4px}
+.price .dots{flex:1;min-width:12px;border-bottom:1px dotted var(--line);transform:translateY(-4px)}
+.price .mn{color:var(--ash);font-size:.84rem;white-space:nowrap}
+.price .pr{font:700 1rem/1 var(--display);font-variant-numeric:tabular-nums;white-space:nowrap}
+.price:hover .nm{text-decoration:underline;text-underline-offset:4px}
+.shelf{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-items:end;border-bottom:3px solid var(--wine-hi);padding-bottom:0}
+.shelf figure{margin:0;display:grid;justify-items:center;gap:8px;text-align:center;min-width:0;padding-bottom:10px}
+.shelf .bottle{height:132px}
+.shelf figcaption{font-size:.8rem;line-height:1.3;color:var(--paper-dim)}
+.shelf figcaption b{display:block;color:var(--paper);font-weight:600}
+.door.adega p{color:var(--paper-dim);max-width:44ch}
+.bottle{display:block;height:150px;width:auto}
+
+.info{display:grid;gap:28px;padding-block:40px;border-top:1px solid var(--line)}
+.info h3{font:700 .74rem/1.2 var(--display);font-stretch:112%;letter-spacing:.18em;text-transform:uppercase;color:var(--ash);margin-bottom:12px}
+.info p,.info li{color:var(--paper-dim)}
+.hours li{display:flex;justify-content:space-between;gap:16px;padding:5px 0;font-variant-numeric:tabular-nums}
+.hours li.today{color:var(--paper);font-weight:600}
+.hours li.today span:first-child::after{content:" · hoje";color:var(--petrol);font-weight:500}
+.info a{text-underline-offset:4px}
+.foot{padding-block:22px 28px;border-top:1px solid var(--line);color:var(--ash);font-size:.8rem}
+
+@media(min-width:860px){
+  .hero{grid-template-columns:minmax(0,1.3fr) minmax(0,.8fr);align-items:end;gap:56px;padding-block:76px 56px}
+  .doors{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+  .door{padding:34px 32px}
+  .info{grid-template-columns:1.2fr 1fr 1fr;gap:48px}
+}
+
+/* ---------- páginas internas ---------- */
+.page{padding-block:36px 56px}
+.page-head{display:grid;gap:10px;margin-bottom:30px}
+.book{display:grid;grid-template-columns:minmax(0,1fr);gap:32px}
+.steps{display:grid;grid-template-columns:minmax(0,1fr);gap:34px;min-width:0}
+.step{min-width:0}
+.step > h3{display:flex;align-items:baseline;gap:12px;font:700 .82rem/1.2 var(--display);font-stretch:112%;letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px}
+.step > h3 .n{display:inline-grid;place-items:center;width:26px;height:26px;border:1.5px solid var(--paper);font-size:.74rem;letter-spacing:0}
+.opts{display:grid;border:1px solid var(--line)}
+.opt{display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:14px;padding:15px 16px;background:var(--coal);border:0;border-bottom:1px solid var(--line);text-align:left;cursor:pointer}
+.opt:last-child{border-bottom:0}
+.opt:hover{background:var(--slate)}
+.opt .nm{font-weight:600;min-width:0}
+.opt .nm em{display:block;font-style:normal;font-weight:400;font-size:.82rem;color:var(--ash)}
+.opt .mn{font-size:.84rem;color:var(--ash);white-space:nowrap}
+.opt .pr{font:700 1rem/1 var(--display);font-variant-numeric:tabular-nums;white-space:nowrap}
+.opt[aria-pressed="true"]{background:var(--paper);color:var(--ink)}
+.opt[aria-pressed="true"] .nm em,.opt[aria-pressed="true"] .mn{color:var(--ink);opacity:.66}
+.whos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.who{display:grid;justify-items:center;gap:10px;padding:16px 8px;background:var(--coal);border:1px solid var(--line);cursor:pointer;font-weight:600;font-size:.92rem;text-align:center;line-height:1.25;min-width:0}
+.who:hover{border-color:var(--ash)}
+.who .av{display:grid;place-items:center;width:46px;height:46px;border:1.5px solid currentColor;font:800 1.2rem/1 var(--display);font-stretch:112%}
+.who[aria-pressed="true"]{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.days{display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;scrollbar-width:thin}
+.day{flex:0 0 auto;display:grid;justify-items:center;gap:4px;width:66px;padding:10px 4px;background:var(--coal);border:1px solid var(--line);cursor:pointer}
+.day .wd{font:600 .66rem/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--ash)}
+.day .dn{font:800 1.35rem/1 var(--display);font-stretch:110%;font-variant-numeric:tabular-nums}
+.day .st{font-size:.66rem;color:var(--ash);line-height:1}
+.day:hover:not([disabled]){border-color:var(--ash)}
+.day[disabled]{opacity:.4;cursor:not-allowed}
+.day[aria-pressed="true"]{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.day[aria-pressed="true"] .wd,.day[aria-pressed="true"] .st{color:var(--ink);opacity:.7}
+.times{display:grid;grid-template-columns:repeat(auto-fill,minmax(74px,1fr));gap:8px;margin-top:14px}
+.time{min-height:44px;background:var(--coal);border:1px solid var(--line);cursor:pointer;font:700 .95rem/1 var(--display);font-variant-numeric:tabular-nums}
+.time:hover:not([disabled]){border-color:var(--paper)}
+.time[disabled]{color:var(--ash);opacity:.45;text-decoration:line-through;cursor:not-allowed}
+.time[aria-pressed="true"]{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.legend{margin-top:10px}
+.fields{display:grid;gap:14px}
+.field{display:grid;gap:6px;min-width:0}
+.field label{font:600 .7rem/1.2 var(--display);font-stretch:112%;letter-spacing:.16em;text-transform:uppercase;color:var(--ash)}
+.field input{width:100%;min-height:48px;padding:0 14px;background:var(--coal);border:1px solid var(--line);border-radius:0;font-size:1rem}
+.field input:focus{border-color:var(--paper);outline:none}
+@media(min-width:560px){.fields{grid-template-columns:1fr 1fr}}
+@media(min-width:860px){
+  .book{grid-template-columns:minmax(0,1fr) 360px;gap:48px;align-items:start}
+  .comanda-col{position:sticky;top:calc(var(--bar) + 24px + env(safe-area-inset-top,0px))}
+}
+
+/* ---------- comanda ---------- */
+.comanda{position:relative;background:var(--paper);color:var(--ink);padding:26px 22px 24px;display:grid;gap:16px}
+.comanda::before,.comanda::after{content:"";position:absolute;left:0;right:0;height:7px}
+.comanda::before{top:0;background:radial-gradient(circle at 7px 0,var(--ink) 4.5px,transparent 5px) 0 0/14px 7px repeat-x}
+.comanda::after{bottom:0;background:radial-gradient(circle at 7px 7px,var(--ink) 4.5px,transparent 5px) 0 0/14px 7px repeat-x}
+.c-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding-bottom:12px;border-bottom:2px solid var(--ink);font:800 .82rem/1 var(--display);font-stretch:118%;letter-spacing:.12em;text-transform:uppercase}
+.c-head span:last-child{font-weight:600;font-stretch:100%;letter-spacing:.16em}
+.c-rows{display:grid;gap:10px}
+.c-rows > div{display:grid;grid-template-columns:104px 1fr;gap:10px;align-items:baseline}
+.c-rows dt{font:600 .66rem/1.3 var(--display);font-stretch:110%;letter-spacing:.14em;text-transform:uppercase;opacity:.6}
+.c-rows dd{font-weight:600;min-width:0;overflow-wrap:anywhere}
+.c-total{display:flex;justify-content:space-between;align-items:baseline;padding-top:12px;border-top:1px dashed var(--ink)}
+.c-total span{font:600 .7rem/1 var(--display);letter-spacing:.16em;text-transform:uppercase}
+.c-total strong{font:800 1.6rem/1 var(--display);font-stretch:112%;font-variant-numeric:tabular-nums}
+.c-hint{font-size:.84rem;opacity:.72}
+.done{display:grid;grid-template-columns:minmax(0,1fr);gap:32px}
+.done-side{display:grid;gap:22px;align-content:start;min-width:0}
+.picks{display:grid;gap:10px}
+.pick{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:12px 14px;border:1px solid var(--line);background:var(--coal)}
+.pick .bottle{height:64px}
+.pick b{display:block;font-weight:600}
+.pick small{color:var(--ash)}
+@media(min-width:860px){.done{grid-template-columns:380px minmax(0,1fr);gap:56px;align-items:start}}
+
+/* ---------- adega ---------- */
+.cellar{background:linear-gradient(170deg,var(--wine-deep),var(--ink) 78%);border-bottom:1px solid var(--line)}
+.cellar .wrap{padding-block:44px 28px;display:grid;gap:16px}
+.cellar .eyebrow{color:var(--wine-glow)}
+.cellar .lede{color:var(--paper-dim)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.chip{min-height:38px;padding:0 14px;background:transparent;border:1px solid var(--line);cursor:pointer;font:600 .72rem/1 var(--display);font-stretch:110%;letter-spacing:.14em;text-transform:uppercase;color:var(--paper-dim)}
+.chip:hover{border-color:var(--paper)}
+.chip[aria-pressed="true"]{background:var(--paper);border-color:var(--paper);color:var(--ink)}
+.wines{display:grid;grid-template-columns:repeat(auto-fill,minmax(236px,1fr));gap:16px}
+.wine-card{display:grid;grid-template-rows:auto 1fr auto;gap:16px;padding:20px;background:var(--coal);border:1px solid var(--line);min-width:0}
+.wine-card .stage{display:grid;place-items:center;padding:16px 0 0;background:linear-gradient(var(--slate),var(--coal));border-bottom:3px solid var(--wine)}
+.wine-card h3{font:500 1.3rem/1.15 var(--serif);margin:8px 0 4px}
+.wine-card .origin{font-size:.84rem;color:var(--ash)}
+.wine-card .note{font-size:.9rem;color:var(--paper-dim);margin-top:8px}
+.wine-card .buy{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.wine-card .buy strong{font:800 1.15rem/1 var(--display);font-variant-numeric:tabular-nums}
+
+/* ---------- sacola ---------- */
+dialog.sheet{margin:0 0 0 auto;width:min(430px,100%);height:100%;max-height:100%;max-width:100%;padding:0;border:0;border-left:1px solid var(--line);background:var(--coal);color:var(--paper)}
+dialog.sheet::backdrop{background:var(--shade)}
+.sheet-in{display:grid;grid-template-rows:auto 1fr auto;height:100%}
+.sheet-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 20px;border-bottom:1px solid var(--line)}
+.sheet-head h2{font:italic 500 1.5rem/1 var(--serif)}
+.sheet-body{overflow-y:auto;padding:18px 20px;display:grid;gap:20px;align-content:start}
+.sheet-foot{padding:16px 20px calc(16px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);display:grid;gap:10px}
+.line{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.line .bottle{height:58px}
+.line b{display:block;font-weight:600;line-height:1.25}
+.line small{color:var(--ash);font-variant-numeric:tabular-nums}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line)}
+.qty button{width:34px;height:34px;background:none;border:0;cursor:pointer;font-size:1.1rem}
+.qty button:hover{background:var(--slate)}
+.qty span{min-width:26px;text-align:center;font-variant-numeric:tabular-nums;font-weight:600}
+.choice{display:grid;gap:8px}
+.choice label,.check{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:12px 14px;border:1px solid var(--line);cursor:pointer}
+.choice input,.check input{margin-top:3px;width:18px;height:18px;accent-color:var(--paper)}
+.choice small{display:block;color:var(--ash)}
+.sum{display:flex;justify-content:space-between;align-items:baseline}
+.sum strong{font:800 1.4rem/1 var(--display);font-variant-numeric:tabular-nums}
+.err{color:var(--wine-glow);font-size:.88rem}
+.x{width:40px;height:40px;background:none;border:1px solid var(--line);cursor:pointer;font-size:1.2rem;line-height:1}
+.x:hover{border-color:var(--paper)}
+.empty{color:var(--ash)}
+
+/* ---------- painel ---------- */
+.demo-note{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;padding:12px 14px;border:1px dashed var(--line);color:var(--ash);font-size:.88rem;margin-bottom:26px}
+.daynav{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.daynav strong{font:700 1rem/1.2 var(--display);font-stretch:108%;min-width:12ch}
+.kpis{display:grid;grid-template-columns:repeat(2,1fr);border:1px solid var(--line);margin-block:22px 34px}
+.kpi{padding:18px 16px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-width:0}
+.kpi:nth-child(2n){border-right:0}
+.kpi:nth-last-child(-n+2){border-bottom:0}
+.kpi span{display:block;font:600 .66rem/1.3 var(--display);font-stretch:110%;letter-spacing:.14em;text-transform:uppercase;color:var(--ash);margin-bottom:10px}
+.kpi strong{font:800 clamp(1.3rem,4vw,1.9rem)/1 var(--display);font-stretch:110%;font-variant-numeric:tabular-nums}
+.panel-sec{margin-bottom:40px}
+.panel-sec > h3{font:700 .82rem/1.2 var(--display);font-stretch:112%;letter-spacing:.16em;text-transform:uppercase;margin-bottom:14px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.feed{display:grid;border:1px solid var(--line)}
+.feed-row{display:grid;grid-template-columns:1fr;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line);background:var(--coal)}
+.feed-row:last-child{border-bottom:0}
+.feed-row .main{display:grid;gap:4px;min-width:0}
+.feed-row .main b{font-weight:600;overflow-wrap:anywhere}
+.feed-row .main small{color:var(--ash)}
+.feed-row .side{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.feed-row .side .pr{font:700 1rem/1 var(--display);font-variant-numeric:tabular-nums;margin-right:auto}
+.feed-empty{padding:22px 16px;color:var(--ash);background:var(--coal)}
+.agenda{display:grid;gap:16px}
+.ag-col{border:1px solid var(--line);min-width:0}
+.ag-col header{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line);background:var(--coal)}
+.ag-col header b{font:800 1.05rem/1 var(--display);font-stretch:112%;text-transform:uppercase;letter-spacing:.04em}
+.ag-col header small{color:var(--ash)}
+.ag-row{display:grid;grid-template-columns:52px 1fr auto;gap:12px;align-items:baseline;padding:11px 16px;border-bottom:1px solid var(--line)}
+.ag-row:last-child{border-bottom:0}
+.ag-row .t{font:700 .95rem/1 var(--display);font-variant-numeric:tabular-nums}
+.ag-row .c{min-width:0}
+.ag-row .c b{font-weight:600;overflow-wrap:anywhere}
+.ag-row .c small{display:block;color:var(--ash)}
+.ag-row .pr{font-variant-numeric:tabular-nums;color:var(--paper-dim);white-space:nowrap}
+.ag-row.site{background:var(--petrol-deep)}
+.ag-row.site .c small,.ag-row.site .pr{color:var(--paper-dim)}
+.calc{display:grid;gap:24px;padding:24px 20px;border:1px solid var(--line);background:var(--coal)}
+.calc-in{display:grid;gap:14px;align-content:start;min-width:0}
+.calc-out{display:grid;gap:0;border:1px solid var(--line);align-content:start;min-width:0}
+.calc-out div{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:14px 16px;border-bottom:1px solid var(--line)}
+.calc-out div:last-child{border-bottom:0;background:var(--paper);color:var(--ink)}
+.calc-out span{font-size:.9rem}
+.calc-out strong{font:800 1.3rem/1 var(--display);font-variant-numeric:tabular-nums;white-space:nowrap}
+.gains{display:grid;gap:8px;color:var(--paper-dim)}
+.gains li{padding-left:22px;position:relative}
+.gains li::before{content:"";position:absolute;left:0;top:.5em;width:12px;height:8px;background:
+  linear-gradient(var(--petrol),var(--petrol)) top/100% 2px no-repeat,
+  linear-gradient(var(--petrol),var(--petrol)) center/100% 2px no-repeat,
+  linear-gradient(var(--petrol),var(--petrol)) bottom/100% 2px no-repeat}
+@media(min-width:700px){
+  .kpis{grid-template-columns:repeat(4,1fr)}
+  .kpi{border-bottom:0}
+  .kpi:nth-child(2n){border-right:1px solid var(--line)}
+  .kpi:last-child{border-right:0}
+  .feed-row{grid-template-columns:1fr auto;align-items:center}
+  .feed-row .side .pr{margin-right:6px}
+  .agenda{grid-template-columns:1fr 1fr}
+  .calc{grid-template-columns:1fr 1fr;padding:30px 28px;gap:36px}
+}
+#app{animation:in .22s ease-out}
+@keyframes in{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){#app{animation:none}.btn{transition:none}}
+</style>
+</head>
+<body>
+
+<div class="proto"><p class="wrap"><b>Protótipo</b>Demonstração de proposta. Agendamentos e reservas feitos aqui não chegam à barbearia.</p></div>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#inicio" aria-label="Studio Reis Barbearia, início"><small class="t">STUDIO</small><b>R<i class="e3"></i>IS</b><small class="b">BARBEARIA</small></a>
+    <nav aria-label="Principal">
+      <a href="#inicio" data-nav="inicio">Início</a>
+      <a href="#agendar" data-nav="agendar">Agendar</a>
+      <a href="#adega" data-nav="adega">Adega</a>
+      <a href="#painel" data-nav="painel">Painel do gestor</a>
+    </nav>
+    <button class="bag" type="button" data-act="open-cart">Sacola <span class="n" data-cartcount>0</span></button>
+  </div>
+</header>
+
+<main id="app"></main>
+
+<nav class="tabs" aria-label="Atalhos">
+  <a href="#inicio" data-nav="inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/></svg>Início</a>
+  <a href="#agendar" data-nav="agendar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6h14v14H5zM5 10h14M9 3v4M15 3v4"/></svg>Agendar</a>
+  <a href="#adega" data-nav="adega"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 3h4v5l2 3v10H8V11l2-3zM8 14h8"/></svg>Adega</a>
+  <a href="#painel" data-nav="painel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7v9H4zM13 4h7v5h-7zM13 11h7v9h-7zM4 15h7v5H4z"/></svg>Painel</a>
+</nav>
+
+<dialog class="sheet" id="cart" aria-label="Sacola da adega"><div class="sheet-in" id="cart-in"></div></dialog>
+
+<noscript><p class="wrap" style="padding-block:32px">Ative o JavaScript para agendar.</p></noscript>
+
+<script>
+/* ================= dados ================= */
+// Serviços, profissionais, horários, endereço e contato: os mesmos publicados hoje pela barbearia.
+const SERVICES=[
+  {id:'cabelo',name:'Cabelo',price:50,min:30},
+  {id:'barba',name:'Barba',note:'Barboterapia',price:50,min:30},
+  {id:'cabelo-barba',name:'Cabelo + Barba',note:'Barboterapia',price:90,min:60},
+  {id:'cabelo-barba-lavagem',name:'Cabelo + Barba + Lavagem capilar',price:100,min:60},
+  {id:'cabelo-barba-sobrancelha',name:'Cabelo + Barba + Sobrancelha',price:100,min:60},
+  {id:'cabelo-lavagem',name:'Cabelo + Lavagem capilar',price:60,min:30},
+  {id:'cabelo-sobrancelha',name:'Cabelo + Sobrancelha',price:60,min:30},
+  {id:'cera',name:'Cera',note:'Orelha e nariz',price:35,min:20},
+];
+const BARBERS=[{id:'gabriel',name:'Gabriel'},{id:'pedro',name:'Pedro'}];
+const HOURS={0:null,1:[600,1140],2:[540,1140],3:[540,1140],4:[540,1140],5:[540,1140],6:[480,1020]}; // minutos do dia
+const SHOP={phone:'5519995668471',phoneLabel:'(19) 99566-8471',address:'Rua Pedro Bassora, 197',district:'Jardim Santa Rosa · Nova Odessa/SP',
+  maps:'https://www.google.com/maps/search/?api=1&query=Rua+Pedro+Bassora+197+Nova+Odessa+SP',insta:'https://www.instagram.com/studioreis.barbearia/'};
+// Adega: rótulos e preços de EXEMPLO, para trocar pelo catálogo real.
+const WINES=[
+  {id:'malbec',type:'tinto',name:'Malbec Reserva',origin:'Mendoza, Argentina',note:'Encorpado, com ameixa e baunilha. Pede churrasco.',price:89},
+  {id:'cabernet',type:'tinto',name:'Cabernet Sauvignon',origin:'Vale Central, Chile',note:'Taninos firmes, fruta negra e um toque de pimenta.',price:69},
+  {id:'carmenere',type:'tinto',name:'Carménère Gran Reserva',origin:'Vale do Colchagua, Chile',note:'Macio, com especiarias e final longo.',price:119},
+  {id:'tannat',type:'tinto',name:'Tannat',origin:'Campanha Gaúcha, Brasil',note:'Potente e escuro. Vai bem com carne vermelha.',price:79},
+  {id:'chardonnay',type:'branco',name:'Chardonnay',origin:'Serra Gaúcha, Brasil',note:'Fresco, fruta branca e leve passagem por barrica.',price:74},
+  {id:'sauvignon',type:'branco',name:'Sauvignon Blanc',origin:'Vale de Casablanca, Chile',note:'Cítrico, para servir bem gelado.',price:65},
+  {id:'rose',type:'rose',name:'Rosé Seco',origin:'Provence, França',note:'Leve e delicado, com morango fresco.',price:129},
+  {id:'brut',type:'espumante',name:'Espumante Brut',origin:'Serra Gaúcha, Brasil',note:'Borbulha fina e acidez viva. Para comemorar.',price:84},
+];
+const TYPES={todos:'Todos',tinto:'Tintos',branco:'Brancos',rose:'Rosés',espumante:'Espumantes'};
+const TYPE_ONE={tinto:'Tinto',branco:'Branco',rose:'Rosé',espumante:'Espumante'};
+const EX_CLIENTS={
+  gabriel:['Rafael M.','Bruno A.','Thiago R.','Felipe N.','Caio P.','Gustavo F.','Marcelo D.','Renan V.','Igor S.','Paulo H.','Wesley C.','Danilo T.','Fábio L.','Murilo B.'],
+  pedro:['Lucas T.','Diego S.','Mateus C.','André L.','Vinícius B.','Leandro O.','Rodrigo P.','Henrique A.','Júlio M.','Samuel R.','Eduardo F.','Otávio N.','Alex G.','Bernardo K.'],
+};
+
+/* ================= utilidades ================= */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const brl=n=>n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const pad=n=>String(n).padStart(2,'0');
+const digits=s=>String(s).replace(/\D/g,'');
+const keyOf=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const dateOf=k=>{const[y,m,d]=k.split('-').map(Number);return new Date(y,m-1,d)};
+const addDays=(d,n)=>new Date(d.getFullYear(),d.getMonth(),d.getDate()+n);
+const today=()=>keyOf(new Date());
+const hm=t=>`${pad(Math.floor(t/60))}:${pad(t%60)}`;
+const WD=['dom','seg','ter','qua','qui','sex','sáb'];
+const WDL=['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
+const svc=id=>SERVICES.find(s=>s.id===id);
+const wine=id=>WINES.find(w=>w.id===id);
+const barberName=id=>id==='any'?'Primeiro disponível':BARBERS.find(b=>b.id===id).name;
+const spanOf=s=>Math.ceil(s.min/30)*30;
+const joinE=a=>a.length<2?a.join(''):a.slice(0,-1).join(', ')+' e '+a[a.length-1];
+function dayShort(k){
+  if(k===today())return 'hoje';
+  if(k===keyOf(addDays(new Date(),1)))return 'amanhã';
+  const d=dateOf(k);return `${WD[d.getDay()]} ${pad(d.getDate())}/${pad(d.getMonth()+1)}`;
+}
+function dayFull(k){const d=dateOf(k);return `${WD[d.getDay()]}, ${pad(d.getDate())}/${pad(d.getMonth()+1)}`}
+function maskPhone(v){
+  const d=digits(v).slice(0,11);
+  if(d.length<3)return d;
+  if(d.length<7)return `(${d.slice(0,2)}) ${d.slice(2)}`;
+  if(d.length<11)return `(${d.slice(0,2)}) ${d.slice(2,6)}-${d.slice(6)}`;
+  return `(${d.slice(0,2)}) ${d.slice(2,7)}-${d.slice(7)}`;
+}
+const GLASS={tinto:['#16241c','#5b1226'],branco:['#56653a','#d9d2a0'],rose:['#dfa0a4','#f1d9d4'],espumante:['#14251b','#c9a24a']};
+function bottle(type){
+  const[g,cap]=GLASS[type];
+  return `<svg class="bottle" viewBox="0 0 60 180" aria-hidden="true"><path fill="${g}" d="M24 8h12v38c0 14 14 16 14 34v88a6 6 0 0 1-6 6H16a6 6 0 0 1-6-6V80c0-18 14-20 14-34z"/><path fill="${cap}" d="M23 4h14v${type==='espumante'?38:24}H23z"/><path fill="#f4f2ee" d="M13 98h34v46H13z"/><path fill="#0a0b0c" d="M24 112h12v3H24zm0 7h12v3H24zm0 7h12v3H24z"/><path fill="#ffffff" opacity=".13" d="M14 84h4v82h-4z"/></svg>`;
+}
+
+/* ================= estado ================= */
+const KEY='studio-reis-demo-v1';
+const saved=(()=>{try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return{}}})();
+const state={
+  view:'inicio',
+  bookings:saved.bookings||[], orders:saved.orders||[], cart:saved.cart||{},
+  draft:{service:null,barber:'any',date:null,time:null,name:'',phone:''},
+  done:null, filter:'todos',
+  pickup:'balcao', age:false, cartError:'', orderDone:null,
+  panelDate:today(), resetArmed:false,
+};
+function save(){try{localStorage.setItem(KEY,JSON.stringify({bookings:state.bookings,orders:state.orders,cart:state.cart}))}catch(e){}}
+
+/* ================= agenda ================= */
+// Ocupação de exemplo: gerada de forma fixa por dia e profissional, para a agenda parecer real na demonstração.
+function hash(str){let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
+function rng(seed){let s=seed||1;return()=>{s^=s<<13;s>>>=0;s^=s>>>17;s^=s<<5;s>>>=0;return s/4294967296}}
+const seedCache=new Map();
+function seeded(k,barber){
+  const ck=k+barber;
+  if(seedCache.has(ck))return seedCache.get(ck);
+  const h=HOURS[dateOf(k).getDay()],out=[];
+  if(h){
+    const r=rng(hash(ck)),names=[...EX_CLIENTS[barber]];let t=h[0];
+    for(let i=names.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[names[i],names[j]]=[names[j],names[i]]}
+    while(t<h[1]){
+      if(r()<.48){
+        const s=SERVICES[Math.floor(r()*SERVICES.length)],span=spanOf(s);
+        if(t+span<=h[1]){out.push({start:t,span,service:s.id,name:names[out.length%names.length],barber,example:true});t+=span;continue}
+      }
+      t+=30;
+    }
+  }
+  seedCache.set(ck,out);return out;
+}
+const taken=(k,barber)=>[...seeded(k,barber),...state.bookings.filter(b=>b.date===k&&b.barber===barber)];
+const isFree=(k,barber,start,span)=>!taken(k,barber).some(a=>start<a.start+a.span&&a.start<start+span);
+function slots(k,pref,span){
+  const h=HOURS[dateOf(k).getDay()];if(!h)return[];
+  const now=new Date(),nowMin=k===today()?now.getHours()*60+now.getMinutes()+10:-1,out=[];
+  const pool=pref==='any'?BARBERS.map(b=>b.id):[pref];
+  for(let t=h[0];t+span<=h[1];t+=30){
+    if(t<nowMin)continue;
+    const who=pool.filter(b=>isFree(k,b,t,span)).sort((a,b)=>taken(k,a).length-taken(k,b).length);
+    out.push({t,ok:who.length>0,who});
+  }
+  return out;
+}
+function nextSlots(n){
+  const out=[];
+  for(let i=0;i<10&&out.length<n;i++){
+    const k=keyOf(addDays(new Date(),i));
+    for(const s of slots(k,'any',30)){if(s.ok){out.push({k,t:s.t,barber:s.who[0]});if(out.length>=n)break}}
+  }
+  return out;
+}
+function firstOpenDay(){
+  for(let i=0;i<14;i++){const k=keyOf(addDays(new Date(),i));if(slots(k,'any',30).some(s=>s.ok))return k}
+  return today();
+}
+function checkTime(){
+  const d=state.draft;if(d.time==null)return;
+  const span=d.service?spanOf(svc(d.service)):30;
+  const s=slots(d.date,d.barber,span).find(x=>x.t===d.time);
+  if(!s||!s.ok){d.notice=`O horário das ${hm(d.time)} não comporta essa escolha. Veja os horários livres abaixo.`;d.time=null}
+}
+const upcomingBooking=()=>[...state.bookings].filter(b=>b.date>=today()).sort((a,b)=>b.at-a.at)[0]||null;
+const cartItems=()=>Object.entries(state.cart).filter(([id,q])=>q>0&&wine(id)).map(([id,q])=>({w:wine(id),q}));
+const cartCount=()=>cartItems().reduce((n,i)=>n+i.q,0);
+const cartTotal=()=>cartItems().reduce((n,i)=>n+i.q*i.w.price,0);
+
+/* ================= telas ================= */
+function homeHTML(){
+  const nx=nextSlots(4),wd=new Date().getDay();
+  const hours=[1,2,3,4,5,6,0].map(d=>`<li class="${d===wd?'today':''}"><span>${WDL[d]}</span><span>${HOURS[d]?hm(HOURS[d][0])+' – '+hm(HOURS[d][1]):'Fechado'}</span></li>`).join('');
+  return `
+  <section class="wrap hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Barbearia e adega · Nova Odessa, SP</p>
+      <h1 aria-label="Pra quem exige o melhor."><span aria-hidden="true">Pra qu<i class="e3"></i>m</span><span aria-hidden="true"><i class="e3"></i>xig<i class="e3"></i></span><span aria-hidden="true">o m<i class="e3"></i>lhor.</span></h1>
+      <p class="lede">Corte, barba e uma boa garrafa no mesmo lugar. Agende em menos de um minuto, sem baixar aplicativo e sem criar senha.</p>
+      <div class="cta"><a class="btn" href="#agendar">Agendar horário</a><a class="btn wine" href="#adega">Entrar na adega</a></div>
+      <p class="proof"><span><strong>5,0</strong> na avaliação dos clientes</span><span><strong>Gabriel e Pedro</strong> na cadeira</span></p>
+    </div>
+    <div class="next" aria-label="Próximos horários livres">
+      <header><span class="eyebrow">Próximos horários</span><span class="live">agenda ao vivo</span></header>
+      ${nx.map(s=>`<button class="slot-row" type="button" data-act="quick" data-k="${s.k}" data-t="${s.t}" data-b="${s.barber}"><span class="t">${hm(s.t)}</span><span class="w">${esc(barberName(s.barber))}<small>${dayShort(s.k)}</small></span><span class="go">Reservar</span></button>`).join('')||'<p class="feed-empty">Sem horários livres nos próximos dias.</p>'}
+    </div>
+  </section>
+
+  <section class="wrap doors">
+    <div class="door tabela">
+      <header><h2 class="h-display">Tabela</h2><span class="fine">Toque em um serviço para agendar</span></header>
+      ${SERVICES.map(s=>`<button class="price" type="button" data-act="quick-service" data-id="${s.id}"><span class="nm">${esc(s.name)}${s.note?`<em>${esc(s.note)}</em>`:''}</span><span class="dots"></span><span class="mn">${s.min} min</span><span class="pr">${brl(s.price)}</span></button>`).join('')}
+    </div>
+    <div class="door adega">
+      <header><h2 class="h-wine">Adega Reis</h2><span class="tag wine">Retire no dia do corte</span></header>
+      <p>Escolha a garrafa pelo site e ela fica separada com o seu nome. Você leva junto quando sair da cadeira.</p>
+      <div class="shelf">${['malbec','brut','chardonnay'].map(id=>{const w=wine(id);return `<figure>${bottle(w.type)}<figcaption><b>${esc(w.name)}</b>${brl(w.price)}</figcaption></figure>`}).join('')}</div>
+      <a class="btn" href="#adega">Ver todos os rótulos</a>
+    </div>
+  </section>
+
+  <section class="wrap info">
+    <div><h3>Onde</h3><p>${SHOP.address}<br>${SHOP.district}</p><p style="margin-top:10px"><a href="${SHOP.maps}" target="_blank" rel="noopener">Abrir no mapa</a></p></div>
+    <div><h3>Horário</h3><ul class="hours">${hours}</ul></div>
+    <div><h3>Contato e pagamento</h3><p>WhatsApp ${SHOP.phoneLabel}<br><a href="${SHOP.insta}" target="_blank" rel="noopener">@studioreis.barbearia</a></p><p style="margin-top:10px">Dinheiro, crédito e débito, direto na barbearia.</p></div>
+  </section>
+  <footer class="wrap foot">Protótipo para apresentação. Serviços, preços e horários são os da barbearia; os rótulos da adega são exemplos. Venda de bebida alcoólica proibida para menores de 18 anos.</footer>`;
+}
+
+function comandaHTML(){
+  const d=state.draft,s=d.service&&svc(d.service),miss=[];
+  if(!s)miss.push('o serviço');
+  if(d.time==null)miss.push('o horário');
+  if(d.name.trim().length<2)miss.push('seu nome');
+  if(digits(d.phone).length<10)miss.push('seu WhatsApp');
+  return `<div class="comanda">
+    <div class="c-head"><span>Studio R<i class="e3"></i>is</span><span>Comanda</span></div>
+    <dl class="c-rows">
+      <div><dt>Serviço</dt><dd>${s?esc(s.name):'—'}</dd></div>
+      <div><dt>Profissional</dt><dd>${esc(barberName(d.barber))}</dd></div>
+      <div><dt>Quando</dt><dd class="num">${d.time!=null?dayFull(d.date)+' · '+hm(d.time):'—'}</dd></div>
+      <div><dt>Duração</dt><dd>${s?s.min+' min':'—'}</dd></div>
+    </dl>
+    <div class="c-total"><span>Total</span><strong>${s?brl(s.price):'—'}</strong></div>
+    <button class="btn ink block" type="button" data-act="confirm" ${miss.length?'disabled':''}>Confirmar agendamento</button>
+    <p class="c-hint">${miss.length?'Falta '+joinE(miss)+'.':'Pagamento na barbearia: dinheiro, crédito ou débito.'}</p>
+  </div>`;
+}
+
+function bookHTML(){
+  const d=state.draft;
+  if(!d.date)d.date=firstOpenDay();
+  const s=d.service&&svc(d.service),span=s?spanOf(s):30,now=today();
+  const days=[...Array(14)].map((_,i)=>keyOf(addDays(new Date(),i))).map(k=>{
+    const dt=dateOf(k),open=HOURS[dt.getDay()],n=open?slots(k,d.barber,span).filter(x=>x.ok).length:0;
+    const st=!open?'fechado':n?(k===now?'hoje':n+' livres'):(k===now?'encerrado':'lotado');
+    return `<button class="day" type="button" data-act="date" data-k="${k}" aria-pressed="${k===d.date}" ${n?'':'disabled'}><span class="wd">${WD[dt.getDay()]}</span><span class="dn">${pad(dt.getDate())}</span><span class="st">${st}</span></button>`;
+  }).join('');
+  const sl=slots(d.date,d.barber,span);
+  return `
+  <section class="wrap page">
+    <header class="page-head"><p class="eyebrow">Agendamento</p><h2 class="h-display">Escolha, marque, pronto.</h2><p class="lede">Tudo em uma tela. Sem aplicativo, sem senha.</p></header>
+    <div class="book">
+      <div class="steps">
+        <div class="step"><h3><span class="n">1</span>Serviço</h3>
+          <div class="opts">${SERVICES.map(x=>`<button class="opt" type="button" data-act="service" data-id="${x.id}" aria-pressed="${x.id===d.service}"><span class="nm">${esc(x.name)}${x.note?`<em>${esc(x.note)}</em>`:''}</span><span class="mn">${x.min} min</span><span class="pr">${brl(x.price)}</span></button>`).join('')}</div>
+        </div>
+        <div class="step"><h3><span class="n">2</span>Profissional</h3>
+          <div class="whos">
+            <button class="who" type="button" data-act="barber" data-id="any" aria-pressed="${d.barber==='any'}"><span class="av"><i class="e3"></i></span>Primeiro disponível</button>
+            ${BARBERS.map(b=>`<button class="who" type="button" data-act="barber" data-id="${b.id}" aria-pressed="${d.barber===b.id}"><span class="av">${b.name[0]}</span>${esc(b.name)}</button>`).join('')}
+          </div>
+        </div>
+        <div class="step"><h3><span class="n">3</span>Dia e horário</h3>
+          <div class="days">${days}</div>
+          ${d.notice?`<p class="err" role="status" style="margin-top:12px">${esc(d.notice)}</p>`:''}
+          <div class="times">${sl.map(x=>`<button class="time" type="button" data-act="time" data-t="${x.t}" aria-pressed="${x.t===d.time}" ${x.ok?'':'disabled aria-label="'+hm(x.t)+' ocupado"'}>${hm(x.t)}</button>`).join('')||'<p class="fine">Sem horários neste dia.</p>'}</div>
+          <p class="fine legend">Horários riscados já estão ocupados${d.barber==='any'?' com os dois profissionais':' com '+esc(barberName(d.barber))}.</p>
+        </div>
+        <div class="step"><h3><span class="n">4</span>Seus dados</h3>
+          <div class="fields">
+            <div class="field"><label for="f-name">Nome</label><input id="f-name" type="text" autocomplete="name" value="${esc(d.name)}"></div>
+            <div class="field"><label for="f-phone">WhatsApp</label><input id="f-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(19) 90000-0000" value="${esc(d.phone)}"></div>
+          </div>
+          <p class="fine" style="margin-top:10px">Seu WhatsApp é usado só para confirmar e lembrar o horário.</p>
+        </div>
+      </div>
+      <aside class="comanda-col" id="comanda" aria-label="Resumo do agendamento">${comandaHTML()}</aside>
+    </div>
+  </section>`;
+}
+
+function doneHTML(){
+  const b=state.bookings.find(x=>x.id===state.done);
+  if(!b){state.done=null;return bookHTML()}
+  const s=svc(b.service),ords=state.orders.filter(o=>o.booking===b.id);
+  const wines=ords.flatMap(o=>o.items),wTotal=ords.reduce((n,o)=>n+o.total,0);
+  const msg=`Olá! Agendei pelo site: ${s.name} com ${barberName(b.barber)}, ${dayFull(b.date)} às ${hm(b.start)}. Nome: ${b.name}. Comanda ${b.id}.`;
+  return `
+  <section class="wrap page">
+    <header class="page-head"><p class="eyebrow">Comanda ${esc(b.id)} · demonstração</p><h2 class="h-display">Horário confirmado.</h2><p class="lede">${esc(b.name.split(' ')[0])}, ${esc(barberName(b.barber))} espera você ${dayShort(b.date)==='hoje'||dayShort(b.date)==='amanhã'?dayShort(b.date):'na '+dayFull(b.date)} às ${hm(b.start)}.</p></header>
+    <div class="done">
+      <div class="comanda">
+        <div class="c-head"><span>Studio R<i class="e3"></i>is</span><span>Nº ${esc(b.id)}</span></div>
+        <dl class="c-rows">
+          <div><dt>Cliente</dt><dd>${esc(b.name)}</dd></div>
+          <div><dt>Serviço</dt><dd>${esc(s.name)}</dd></div>
+          <div><dt>Profissional</dt><dd>${esc(barberName(b.barber))}</dd></div>
+          <div><dt>Quando</dt><dd class="num">${dayFull(b.date)} · ${hm(b.start)}</dd></div>
+          ${wines.map(i=>`<div><dt>Adega</dt><dd>${i.q}× ${esc(wine(i.id).name)}</dd></div>`).join('')}
+        </dl>
+        <div class="c-total"><span>Total na barbearia</span><strong>${brl(s.price+wTotal)}</strong></div>
+        <p class="c-hint">${SHOP.address}, ${SHOP.district}</p>
+      </div>
+      <div class="done-side">
+        <div class="cta">
+          <a class="btn" href="https://wa.me/${SHOP.phone}?text=${encodeURIComponent(msg)}" target="_blank" rel="noopener">Enviar no WhatsApp</a>
+          <button class="btn ghost" type="button" data-act="new-booking">Agendar outro</button>
+          <a class="btn ghost" href="#painel">Ver no painel</a>
+        </div>
+        <div>
+          <h3 class="h-wine" style="font-size:1.9rem;margin-bottom:6px">Leve uma garrafa no dia</h3>
+          <p class="lede" style="margin-bottom:14px">Ela entra na mesma comanda e fica separada até você chegar.</p>
+          <div class="picks">${['malbec','brut','chardonnay'].map(id=>{const w=wine(id);return `<div class="pick">${bottle(w.type)}<div><b>${esc(w.name)}</b><small>${esc(w.origin)} · ${brl(w.price)}</small></div><button class="btn wine small" type="button" data-act="add-pick" data-id="${w.id}">Adicionar</button></div>`}).join('')}</div>
+        </div>
+      </div>
+    </div>
+  </section>`;
+}
+
+function adegaHTML(){
+  const list=WINES.filter(w=>state.filter==='todos'||w.type===state.filter);
+  return `
+  <section class="cellar"><div class="wrap">
+    <p class="eyebrow">Adega virtual</p>
+    <h2 class="h-wine">Adega Reis</h2>
+    <p class="lede">Reserve a garrafa agora e retire na barbearia, junto com o seu corte ou no balcão. O pagamento é feito na retirada.</p>
+    <div class="chips" role="group" aria-label="Filtrar por tipo">${Object.entries(TYPES).map(([k,v])=>`<button class="chip" type="button" data-act="filter" data-id="${k}" aria-pressed="${state.filter===k}">${v}</button>`).join('')}</div>
+  </div></section>
+  <section class="wrap page">
+    <div class="wines">${list.map(w=>`
+      <article class="wine-card">
+        <div class="stage">${bottle(w.type)}</div>
+        <div><span class="tag wine">${TYPE_ONE[w.type]}</span><h3>${esc(w.name)}</h3><p class="origin">${esc(w.origin)}</p><p class="note">${esc(w.note)}</p></div>
+        <div class="buy"><strong>${brl(w.price)}</strong><button class="btn wine small" type="button" data-act="add" data-id="${w.id}">${state.cart[w.id]?'Na sacola · '+state.cart[w.id]:'Adicionar'}</button></div>
+      </article>`).join('')}</div>
+    <p class="fine" style="margin-top:22px">Rótulos e preços de exemplo. Venda proibida para menores de 18 anos. Aprecie com moderação.</p>
+  </section>`;
+}
+
+function cartHTML(){
+  const head=`<div class="sheet-head"><h2>Sacola</h2><button class="x" type="button" data-act="close-cart" aria-label="Fechar sacola">×</button></div>`;
+  if(state.orderDone){
+    const o=state.orders.find(x=>x.id===state.orderDone),bk=o&&o.booking&&state.bookings.find(b=>b.id===o.booking);
+    return `${head}<div class="sheet-body">
+      <p class="eyebrow">Pedido ${o?esc(o.id):''}</p>
+      <p class="h-wine" style="font-size:2rem">Garrafas reservadas.</p>
+      <p class="lede">${bk?`Elas estarão separadas para ${dayFull(bk.date)} às ${hm(bk.start)}, junto com o seu horário.`:`Retire no balcão, ${SHOP.address}, no horário de atendimento.`} O pagamento é feito na retirada.</p>
+    </div><div class="sheet-foot"><a class="btn" href="#painel" data-act="close-cart">Ver no painel do gestor</a><button class="btn ghost" type="button" data-act="close-cart">Fechar</button></div>`;
+  }
+  const items=cartItems();
+  if(!items.length)return `${head}<div class="sheet-body"><p class="empty">Sua sacola está vazia. Escolha um rótulo na adega.</p></div><div class="sheet-foot"><a class="btn wine" href="#adega" data-act="close-cart">Ir para a adega</a></div>`;
+  const bk=upcomingBooking(),d=state.draft;
+  if(!bk&&state.pickup==='booking')state.pickup='balcao';
+  return `${head}
+  <div class="sheet-body">
+    <div style="display:grid;gap:14px">${items.map(({w,q})=>`<div class="line">${bottle(w.type)}<div><b>${esc(w.name)}</b><small>${brl(w.price)} cada</small></div><div class="qty" role="group" aria-label="Quantidade de ${esc(w.name)}"><button type="button" data-act="dec" data-id="${w.id}" aria-label="Diminuir">−</button><span>${q}</span><button type="button" data-act="inc" data-id="${w.id}" aria-label="Aumentar">+</button></div></div>`).join('')}</div>
+    <div class="choice"><p class="eyebrow" style="margin-bottom:4px">Retirada</p>
+      ${bk?`<label><input type="radio" name="pickup" id="pk-booking" value="booking" ${state.pickup==='booking'?'checked':''}><span>Junto com meu horário<small>${dayFull(bk.date)} às ${hm(bk.start)} · ${esc(barberName(bk.barber))}</small></span></label>`:''}
+      <label><input type="radio" name="pickup" id="pk-balcao" value="balcao" ${state.pickup==='balcao'?'checked':''}><span>No balcão<small>${SHOP.address} · horário de atendimento</small></span></label>
+    </div>
+    <div class="fields" style="grid-template-columns:1fr">
+      <div class="field"><label for="c-name">Nome para a reserva</label><input id="c-name" type="text" autocomplete="name" value="${esc(d.name)}"></div>
+      <div class="field"><label for="c-phone">WhatsApp</label><input id="c-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(19) 90000-0000" value="${esc(d.phone)}"></div>
+    </div>
+    <label class="check"><input type="checkbox" id="c-age" ${state.age?'checked':''}><span>Declaro que tenho 18 anos ou mais.</span></label>
+    ${state.cartError?`<p class="err" role="alert">${esc(state.cartError)}</p>`:''}
+  </div>
+  <div class="sheet-foot"><div class="sum"><span>Total</span><strong>${brl(cartTotal())}</strong></div><button class="btn wine block" type="button" data-act="reserve">Reservar garrafas</button><p class="fine">Pagamento na retirada. Nada é cobrado agora.</p></div>`;
+}
+
+function panelHTML(){
+  const k=state.panelDate,dt=dateOf(k),open=HOURS[dt.getDay()];
+  const cols=BARBERS.map(b=>({b,rows:taken(k,b.id).sort((x,y)=>x.start-y.start)}));
+  const all=cols.flatMap(c=>c.rows),rev=all.reduce((n,a)=>n+svc(a.service).price,0);
+  const occ=open?Math.round(all.reduce((n,a)=>n+a.span,0)/(BARBERS.length*(open[1]-open[0]))*100):0;
+  const openOrders=state.orders.filter(o=>!o.delivered),wineRev=openOrders.reduce((n,o)=>n+o.total,0);
+  const feed=[...state.bookings.map(b=>({at:b.at,html:`<div class="feed-row"><div class="main"><b>${esc(b.name)} · ${esc(svc(b.service).name)}</b><small class="num">${dayFull(b.date)} às ${hm(b.start)} · ${esc(barberName(b.barber))} · ${esc(b.phone)}</small></div><div class="side"><span class="tag site">Agendamento</span><span class="pr">${brl(svc(b.service).price)}</span><button class="btn ghost small" type="button" data-act="cancel-booking" data-id="${b.id}">Cancelar</button></div></div>`})),
+    ...state.orders.map(o=>{const bk=o.booking&&state.bookings.find(b=>b.id===o.booking);return{at:o.at,html:`<div class="feed-row"><div class="main"><b>${esc(o.name)} · ${o.items.map(i=>i.q+'× '+esc(wine(i.id).name)).join(', ')}</b><small class="num">${bk?'Retira com o corte de '+dayFull(bk.date)+' às '+hm(bk.start):'Retira no balcão'}${o.phone?' · '+esc(o.phone):''}</small></div><div class="side"><span class="tag wine">Adega</span><span class="pr">${brl(o.total)}</span>${o.delivered?'<span class="tag">Entregue</span>':`<button class="btn ghost small" type="button" data-act="deliver" data-id="${o.id}">Marcar entregue</button>`}</div></div>`}})]
+    .sort((a,b)=>b.at-a.at).map(x=>x.html).join('');
+  return `
+  <section class="wrap page">
+    <header class="page-head"><p class="eyebrow">Visão do dono</p><h2 class="h-display">Painel do gestor</h2></header>
+    <p class="demo-note"><span class="tag">Demonstração</span>Os nomes da agenda são fictícios. O que você marcar em Agendar ou reservar na Adega aparece aqui na hora.</p>
+
+    <div class="daynav">
+      <button class="btn ghost small" type="button" data-act="panel-day" data-d="-1" aria-label="Dia anterior">←</button>
+      <strong>${WDL[dt.getDay()]}, ${pad(dt.getDate())}/${pad(dt.getMonth()+1)}</strong>
+      <button class="btn ghost small" type="button" data-act="panel-day" data-d="1" aria-label="Próximo dia">→</button>
+      ${k!==today()?'<button class="btn ghost small" type="button" data-act="panel-today">Hoje</button>':''}
+    </div>
+    <div class="kpis">
+      <div class="kpi"><span>Atendimentos no dia</span><strong>${all.length}</strong></div>
+      <div class="kpi"><span>Serviços previstos</span><strong>${brl(rev)}</strong></div>
+      <div class="kpi"><span>Ocupação das cadeiras</span><strong>${occ}%</strong></div>
+      <div class="kpi"><span>Adega a retirar</span><strong>${brl(wineRev)}</strong></div>
+    </div>
+
+    <div class="panel-sec"><h3>Chegou pelo site</h3>
+      <div class="feed">${feed||'<p class="feed-empty">Nada ainda. Faça um agendamento ou reserve uma garrafa e volte aqui.</p>'}</div>
+    </div>
+
+    <div class="panel-sec"><h3>Agenda do dia</h3>
+      ${open?`<div class="agenda">${cols.map(c=>`<div class="ag-col"><header><b>${esc(c.b.name)}</b><small>${c.rows.length} atendimentos · ${brl(c.rows.reduce((n,a)=>n+svc(a.service).price,0))}</small></header>${c.rows.map(a=>`<div class="ag-row ${a.example?'':'site'}"><span class="t">${hm(a.start)}</span><span class="c"><b>${esc(a.name)}</b><small>${esc(svc(a.service).name)}${a.example?'':' · pelo site'}</small></span><span class="pr">${brl(svc(a.service).price)}</span></div>`).join('')||'<p class="feed-empty">Agenda livre.</p>'}</div>`).join('')}</div>`:'<p class="feed-empty" style="border:1px solid var(--line)">Barbearia fechada neste dia.</p>'}
+    </div>
+
+    <div class="panel-sec"><h3>Quanto custa por mês</h3>
+      <div class="calc">
+        <div class="calc-in">
+          <div class="field"><label for="calc-atual">Plano do aplicativo hoje (R$ por mês)</label><input id="calc-atual" type="number" min="0" step="10" inputmode="decimal" value="200"></div>
+          <div class="field"><label for="calc-proprio">Site próprio: domínio e hospedagem (R$ por mês)</label><input id="calc-proprio" type="number" min="0" step="5" inputmode="decimal" value="35"></div>
+          <p class="fine">Valores de exemplo. Troque pelo que a barbearia paga hoje para ver a conta real.</p>
+        </div>
+        <div style="display:grid;gap:18px;align-content:start;min-width:0">
+          <div class="calc-out">
+            <div><span>Economia por mês</span><strong id="o-mes">—</strong></div>
+            <div><span>Economia por ano</span><strong id="o-ano">—</strong></div>
+            <div><span>Isso equivale a</span><strong id="o-cortes">—</strong></div>
+          </div>
+          <ul class="gains">
+            <li>O custo não sobe quando entra mais um profissional.</li>
+            <li>Barbearia e adega na mesma comanda.</li>
+            <li>Marca, endereço do site e lista de clientes são da barbearia.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn ghost small" type="button" data-act="reset">${state.resetArmed?'Confirmar: apagar tudo':'Limpar dados da demonstração'}</button>
+  </section>`;
+}
+function updateCalc(){
+  const a=$('#calc-atual'),p=$('#calc-proprio');if(!a||!p)return;
+  const m=Math.max(0,(parseFloat(a.value)||0)-(parseFloat(p.value)||0));
+  $('#o-mes').textContent=brl(m);$('#o-ano').textContent=brl(m*12);
+  const n=Math.floor(m*12/50);$('#o-cortes').textContent=n+(n===1?' corte por ano':' cortes por ano');
+}
+
+/* ================= render ================= */
+function render(){
+  const v=state.view;
+  $('#app').innerHTML=v==='agendar'?(state.done?doneHTML():bookHTML()):v==='adega'?adegaHTML():v==='painel'?panelHTML():homeHTML();
+  chrome();
+  if(v==='painel')updateCalc();
+  if(v==='agendar'&&!state.done){const sel=document.querySelector('.day[aria-pressed="true"]');if(sel&&sel.scrollIntoView)sel.scrollIntoView({block:'nearest',inline:'nearest'})}
+}
+function chrome(){
+  document.querySelectorAll('[data-nav]').forEach(a=>{if(a.dataset.nav===state.view)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+  document.querySelectorAll('[data-cartcount]').forEach(n=>n.textContent=cartCount());
+}
+function renderCart(){$('#cart-in').innerHTML=cartHTML();chrome()}
+function openCart(){state.cartError='';renderCart();const d=$('#cart');if(!d.open)d.showModal()}
+function closeCart(){const d=$('#cart');if(d.open)d.close();if(state.orderDone){state.orderDone=null}}
+function go(view){
+  const map={inicio:1,agendar:1,adega:1,painel:1};
+  state.view=map[view]?view:'inicio';state.resetArmed=false;
+  render();window.scrollTo(0,0);
+}
+function route(){go((location.hash||'#inicio').slice(1))}
+function nav(view){if(location.hash==='#'+view)go(view);else location.hash=view}
+
+/* ================= ações ================= */
+const actions={
+  quick(el){Object.assign(state.draft,{barber:el.dataset.b,date:el.dataset.k,time:+el.dataset.t,notice:''});state.done=null;nav('agendar')},
+  'quick-service'(el){state.draft.service=el.dataset.id;state.done=null;checkTime();nav('agendar')},
+  service(el){state.draft.service=el.dataset.id;checkTime();render()},
+  barber(el){state.draft.barber=el.dataset.id;checkTime();render()},
+  date(el){Object.assign(state.draft,{date:el.dataset.k,time:null,notice:''});render()},
+  time(el){Object.assign(state.draft,{time:+el.dataset.t,notice:''});render()},
+  confirm(){
+    const d=state.draft,s=svc(d.service);if(!s||d.time==null)return;
+    const span=spanOf(s),sl=slots(d.date,d.barber,span).find(x=>x.t===d.time);
+    if(!sl||!sl.ok){d.time=null;render();return}
+    const b={id:'R'+String(Date.now()).slice(-5),date:d.date,start:d.time,span,service:s.id,barber:sl.who[0],name:d.name.trim(),phone:d.phone,at:Date.now()};
+    state.bookings.push(b);save();
+    state.done=b.id;state.pickup='booking';d.service=null;d.time=null;
+    render();window.scrollTo(0,0);
+  },
+  'new-booking'(){state.done=null;render();window.scrollTo(0,0)},
+  filter(el){state.filter=el.dataset.id;render()},
+  add(el){state.cart[el.dataset.id]=(state.cart[el.dataset.id]||0)+1;save();render()},
+  'add-pick'(el){state.cart[el.dataset.id]=(state.cart[el.dataset.id]||0)+1;state.pickup='booking';save();openCart()},
+  inc(el){state.cart[el.dataset.id]=(state.cart[el.dataset.id]||0)+1;save();renderCart();if(state.view==='adega')render()},
+  dec(el){const id=el.dataset.id;state.cart[id]=Math.max(0,(state.cart[id]||0)-1);if(!state.cart[id])delete state.cart[id];save();renderCart();if(state.view==='adega')render()},
+  'open-cart'(){openCart()},
+  'close-cart'(){closeCart()},
+  reserve(){
+    const d=state.draft,items=cartItems();if(!items.length)return;
+    if(d.name.trim().length<2){state.cartError='Informe o nome para a reserva.';return renderCart()}
+    if(digits(d.phone).length<10){state.cartError='Informe um WhatsApp com DDD.';return renderCart()}
+    if(!state.age){state.cartError='Confirme que você tem 18 anos ou mais.';return renderCart()}
+    const bk=state.pickup==='booking'?upcomingBooking():null;
+    const o={id:'A'+String(Date.now()).slice(-5),items:items.map(i=>({id:i.w.id,q:i.q})),total:cartTotal(),booking:bk?bk.id:null,name:d.name.trim(),phone:d.phone,at:Date.now()};
+    state.orders.push(o);state.cart={};state.cartError='';state.orderDone=o.id;save();
+    renderCart();render();
+  },
+  'cancel-booking'(el){
+    state.bookings=state.bookings.filter(b=>b.id!==el.dataset.id);
+    state.orders.forEach(o=>{if(o.booking===el.dataset.id)o.booking=null});
+    if(state.done===el.dataset.id)state.done=null;save();render();
+  },
+  deliver(el){const o=state.orders.find(x=>x.id===el.dataset.id);if(o){o.delivered=true;save();render()}},
+  'panel-day'(el){state.panelDate=keyOf(addDays(dateOf(state.panelDate),+el.dataset.d));render()},
+  'panel-today'(){state.panelDate=today();render()},
+  reset(){
+    if(!state.resetArmed){state.resetArmed=true;return render()}
+    Object.assign(state,{bookings:[],orders:[],cart:{},done:null,resetArmed:false});save();render();
+  },
+};
+document.addEventListener('click',e=>{
+  const el=e.target.closest('[data-act]');
+  if(el&&actions[el.dataset.act]){actions[el.dataset.act](el);return}
+  if(e.target===$('#cart'))closeCart();
+});
+document.addEventListener('input',e=>{
+  const t=e.target,d=state.draft;
+  if(t.id==='f-name'||t.id==='c-name')d.name=t.value;
+  else if(t.id==='f-phone'||t.id==='c-phone'){t.value=maskPhone(t.value);d.phone=t.value}
+  else if(t.id==='calc-atual'||t.id==='calc-proprio'){updateCalc();return}
+  else return;
+  const c=$('#comanda');if(c&&t.id[0]==='f')c.innerHTML=comandaHTML();
+});
+document.addEventListener('change',e=>{
+  const t=e.target;
+  if(t.name==='pickup')state.pickup=t.value;
+  if(t.id==='c-age')state.age=t.checked;
+});
+$('#cart').addEventListener('close',()=>{state.orderDone=null});
+window.addEventListener('hashchange',route);
+// Quem já agendou neste aparelho não precisa digitar nome e WhatsApp de novo.
+const known=upcomingBooking();
+if(known){Object.assign(state.draft,{name:known.name,phone:known.phone});state.pickup='booking'}
+route();
+</script>
+</body>
+</html>
